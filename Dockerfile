@@ -1,4 +1,4 @@
-FROM lustefaniak/docker-graalvm:alpine-1.0.0-rc11.1 AS build
+FROM lustefaniak/docker-graalvm:alpine-1.0.0-rc12.0 AS build
 
 RUN apk add --no-cache procps alpine-baselayout wget unzip tar
 
@@ -17,7 +17,7 @@ RUN tar Cxfvz /opt/cdbg /opt/cdbg/cdbg_java_agent.tar.gz --no-same-owner \
  && mkdir /var/log/app_engine \
  && chmod go+rwx /var/log/app_engine
 
-FROM lustefaniak/docker-graalvm:alpine-1.0.0-rc11.1
+FROM lustefaniak/docker-graalvm:alpine-1.0.0-rc12.0
 
 RUN apk add --no-cache procps alpine-baselayout bash
 
