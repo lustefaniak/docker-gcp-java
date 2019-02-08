@@ -2,7 +2,7 @@
 
 # configure Stackdriver Profiler
 
-export PROFILER_AGENT_COMMAND=${PROFILER_AGENT_COMMAND:-"-agentpath:/opt/cprof/profiler_java_agent.so=--logtostderr"}
+export PROFILER_AGENT_COMMAND=${PROFILER_AGENT_COMMAND:-"-agentpath:/opt/cprof/profiler_java_agent.so=--logtostderr,-cprof_service=${GCP_APP_NAME},-cprof_service_version=${GCP_APP_VERSION}"}
 
 export PROFILER_AGENT=
 

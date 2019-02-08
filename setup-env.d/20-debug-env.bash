@@ -11,5 +11,5 @@ fi
 
 if is_true "$DBG_ENABLE"; then
   unset CDBG_DISABLE
-  DBG_AGENT="$($DBG_SCRIPT_PATH)"
+  DBG_AGENT="$($DBG_SCRIPT_PATH) -Dcom.google.cdbg.module=${GCP_APP_NAME} -Dcom.google.cdbg.version=${GCP_APP_VERSION}"
 fi

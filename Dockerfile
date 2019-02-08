@@ -28,6 +28,9 @@ COPY --from=build /shutdown/ /shutdown/
 COPY --from=build /opt /opt
 COPY --from=build /var/log/app_engine /var/log/app_engine
 
+ENV GCP_APP_NAME "app-name"
+ENV GCP_APP_VERSION "1.0.0"
+
 ENV PROFILER_ENABLE false
 ENV DBG_ENABLE false
 
