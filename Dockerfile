@@ -1,6 +1,8 @@
-FROM lustefaniak/docker-graalvm:alpine-1.0.0-rc12.0 AS build
+ARG BASE_IMAGE=lustefaniak/docker-graalvm:alpine-1.0.0-rc12.0
 
-RUN apk add --no-cache procps alpine-baselayout wget unzip tar
+FROM alpine:3.9 AS build
+
+RUN apk add --no-cache procps alpine-baselayout wget unzip tar bash
 
 ADD https://storage.googleapis.com/cloud-debugger/appengine-java/current/cdbg_java_agent.tar.gz /opt/cdbg/
 ADD https://storage.googleapis.com/cloud-profiler/java/latest/profiler_java_agent.tar.gz /opt/cprof/
@@ -18,15 +20,12 @@ RUN tar Cxfvz /opt/cdbg /opt/cdbg/cdbg_java_agent.tar.gz --no-same-owner \
  && mkdir -p /var/log/app_engine/heapdump \
  && chmod go+rwx -R /var/log/app_engine
 
-
 FROM golang:latest AS gcsupload
 RUN mkdir /app
 WORKDIR /app
 RUN go get -u github.com/GoogleCloudPlatform/golang-samples/storage/gcsupload
 
-FROM lustefaniak/docker-graalvm:alpine-1.0.0-rc12.0
-
-RUN apk add --no-cache procps alpine-baselayout bash
+FROM ${BASE_IMAGE}
 
 COPY --from=build /docker-entrypoint.bash /docker-entrypoint.bash
 COPY --from=build /upload-heap-dump.bash /upload-heap-dump.bash
