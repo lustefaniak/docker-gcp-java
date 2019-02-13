@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ -z "$PLATFORM" ]; then
   if [ -n "$GAE_INSTANCE" ]; then

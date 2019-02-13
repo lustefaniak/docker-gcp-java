@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 for heapdump in ${JAVA_HEAP_DUMP_PATH}/*.hprof; do
     TARGET_NAME=${GCS_HEAP_DUMP_PATH}${GCP_APP_NAME}-${GCP_APP_VERSION}-$(date +%Y-%m-%dT%H:%M:%S%z)-$(hostname).hprof

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 GetAvailableMemory () {
   local default_memory="$(awk '/MemTotal/{ print int($2/1024-400) }' /proc/meminfo)"

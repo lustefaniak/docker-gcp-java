@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 is_true() {
   # case insensitive check for "true"

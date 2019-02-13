@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 is_java_cmd() {
   [ "$(which java)" = "$1" -o "$(readlink -f $(which java))" = "$1" ]
