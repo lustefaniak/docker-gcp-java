@@ -2,14 +2,10 @@
 
 # configure Cloud Debugger
 
-export DBG_SCRIPT_PATH=${DBG_SCRIPT_PATH:-"/opt/cdbg/format-env-appengine-vm.sh"}
+export DBG_AGENT_COMMAND=${PROFILER_AGENT_COMMAND:-"-agentpath:/opt/cdbg/cdbg_java_agent.so="}
 
-if [ "$PLATFORM" = "gae" ]; then
-  export DBG_AGENT=
-  export DBG_ENABLE=${DBG_ENABLE:-$( if [[ -z "${CDBG_DISABLE}" && -x "${DBG_SCRIPT_PATH}" ]] ; then echo true; else echo false ; fi )}
-fi
+export DBG_AGENT=
 
 if is_true "$DBG_ENABLE"; then
-  unset CDBG_DISABLE
-  DBG_AGENT="$($DBG_SCRIPT_PATH) -Dcom.google.cdbg.module=${GCP_APP_NAME} -Dcom.google.cdbg.version=${GCP_APP_VERSION}"
+  DBG_AGENT="${DBG_AGENT_COMMAND} -Dcom.google.cdbg.module=${GCP_APP_NAME} -Dcom.google.cdbg.version=${GCP_APP_VERSION}"
 fi
