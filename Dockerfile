@@ -23,7 +23,10 @@ RUN tar Cxfvz /opt/cdbg /opt/cdbg/cdbg_java_agent.tar.gz --no-same-owner \
 FROM golang:latest AS gcsupload
 RUN mkdir /app
 WORKDIR /app
-RUN go get -u github.com/GoogleCloudPlatform/golang-samples/storage/gcsupload
+
+COPY gcsupload/gcsupload.go /app
+RUN go get -d -v .
+RUN CGO_ENABLED=0 go build -installsuffix 'static' -o /gcsupload .
 
 FROM ${BASE_IMAGE}
 
@@ -34,7 +37,7 @@ COPY --from=build /shutdown/ /shutdown/
 
 COPY --from=build /opt /opt
 COPY --from=build /var/log/app_engine /var/log/app_engine
-COPY --from=gcsupload /go/bin/gcsupload /gcsupload
+COPY --from=gcsupload /gcsupload /gcsupload
 
 ENV GCP_APP_NAME "app-name"
 ENV GCP_APP_VERSION "1.0.0"
@@ -48,6 +51,7 @@ ENV JAVA_HEAP_DUMP_PATH /var/log/app_engine/heapdump/
 ENV UPLOAD_HEAP_DUMP false
 ENV GCS_HEAP_DUMP_PROJECT_ID "project_id"
 ENV GCS_HEAP_DUMP_BUCKET "gcs_bucket_name"
+ENV GCS_HEAP_DUMP_COMPRESS "true"
 ENV GCS_HEAP_DUMP_PATH ""
 
 ENTRYPOINT ["/docker-entrypoint.bash"]
