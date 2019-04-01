@@ -24,6 +24,7 @@ FROM golang:1.12.1-alpine3.9 AS gcsupload
 RUN mkdir /app
 WORKDIR /app
 
+RUN apk --no-cache add git 
 COPY gcsupload/gcsupload.go /app
 RUN go get -d -v .
 RUN CGO_ENABLED=0 go build -installsuffix 'static' -o /gcsupload .
