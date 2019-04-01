@@ -1,6 +1,6 @@
 ARG BASE_IMAGE=lustefaniak/docker-graalvm:alpine-1.0.0-rc12.0
 
-FROM alpine:3.9 AS build
+FROM alpine:3.9.2 AS build
 
 RUN apk add --no-cache procps alpine-baselayout wget unzip tar bash
 
@@ -20,7 +20,7 @@ RUN tar Cxfvz /opt/cdbg /opt/cdbg/cdbg_java_agent.tar.gz --no-same-owner \
  && mkdir -p /var/log/app_engine/heapdump \
  && chmod go+rwx -R /var/log/app_engine
 
-FROM golang:latest AS gcsupload
+FROM golang:1.12.1-alpine3.9 AS gcsupload
 RUN mkdir /app
 WORKDIR /app
 
@@ -40,7 +40,7 @@ COPY --from=build /var/log/app_engine /var/log/app_engine
 COPY --from=gcsupload /gcsupload /gcsupload
 
 ENV GCP_APP_NAME "app-name"
-ENV GCP_APP_VERSION "1.0.0"
+ENV GCP_APP_VERSION "0.0.0"
 
 ENV PROFILER_ENABLE false
 ENV DBG_ENABLE false
