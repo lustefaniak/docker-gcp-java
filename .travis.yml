@@ -1,0 +1,18 @@
+language: minimal
+sudo: false
+
+env:
+  - NAME=alpine-graalvm-1.0.0-rc14 BASE_IMAGE=lustefaniak/docker-graalvm:alpine-1.0.0-rc14.1
+
+services:
+  - docker
+
+script:
+  - bash build.sh
+  - bash test.sh
+
+deploy:
+  provider: script
+  script: bash push.sh
+  on:
+    tags: true
