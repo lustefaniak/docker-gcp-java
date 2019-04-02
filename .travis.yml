@@ -3,7 +3,10 @@ sudo: false
 
 env:
   - NAME=alpine-graalvm-1.0.0-rc14 BASE_IMAGE=lustefaniak/docker-graalvm:alpine-1.0.0-rc14.1
-
+  - NAME=alpine-adoptopenjdk8 BASE_IMAGE=adoptopenjdk/openjdk8:jre8u202-b08-alpine 
+  - NAME=alpine-adoptopenjdk8-slim BASE_IMAGE=adoptopenjdk/openjdk8:jdk8u202-b08-alpine-slim
+  - NAME=alpine-adoptopenjdk11 BASE_IMAGE=adoptopenjdk/openjdk11:jre-11.0.2.9-alpine
+  - NAME=alpine-adoptopenjdk11-slim BASE_IMAGE=adoptopenjdk/openjdk11:jdk-11.0.2.9-alpine-slim
 services:
   - docker
 
