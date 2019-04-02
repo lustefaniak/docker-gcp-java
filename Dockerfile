@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=lustefaniak/docker-graalvm:alpine-1.0.0-rc14.0
+ARG BASE_IMAGE=lustefaniak/docker-graalvm:alpine-1.0.0-rc14.1
 
 FROM alpine:3.9.2 AS build
 
@@ -30,6 +30,8 @@ RUN go get -d -v .
 RUN CGO_ENABLED=0 go build -installsuffix 'static' -o /gcsupload .
 
 FROM ${BASE_IMAGE}
+
+RUN apk add --no-cache alpine-baselayout ca-certificates bash curl procps
 
 COPY --from=build /docker-entrypoint.bash /docker-entrypoint.bash
 COPY --from=build /upload-heap-dump.bash /upload-heap-dump.bash
