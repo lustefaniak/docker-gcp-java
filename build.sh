@@ -15,4 +15,4 @@ VERSION=${FULL_VERSION//v}
 
 echo "Building using NAME=$NAME BASE_IMAGE=$BASE_IMAGE VERSION=$VERSION"
 
-docker build . --build-arg BASE_IMAGE="${BASE_IMAGE}"  -t "lustefaniak/docker-gcp-java:${NAME}_${VERSION}"
+docker build . --build-arg BASE_IMAGE="${BASE_IMAGE}" -t "lustefaniak/docker-gcp-java:${NAME}_${VERSION}"
