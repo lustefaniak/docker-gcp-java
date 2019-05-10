@@ -1,6 +1,6 @@
 ARG BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.0.0
 
-FROM alpine:3.9.2 AS build
+FROM alpine:3.9.3 AS build
 
 RUN apk add --no-cache procps alpine-baselayout wget unzip tar bash
 
