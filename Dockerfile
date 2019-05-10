@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=lustefaniak/docker-graalvm:alpine-1.0.0-rc14.1
+ARG BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.0.0
 
 FROM alpine:3.9.2 AS build
 
