@@ -2,7 +2,7 @@ language: minimal
 sudo: false
 
 env:
-  - NAME=alpine-graalvm-19.0.0 BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.0.0
+  - NAME=alpine-graalvm-19.0.2 BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.0.2
   - NAME=alpine-adoptopenjdk8 BASE_IMAGE=adoptopenjdk/openjdk8:jre8u202-b08-alpine 
   - NAME=alpine-adoptopenjdk11 BASE_IMAGE=adoptopenjdk/openjdk11:jre-11.0.2.9-alpine
 services:
