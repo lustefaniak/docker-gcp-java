@@ -2,9 +2,9 @@ language: minimal
 sudo: false
 
 env:
-  - NAME=alpine-graalvm8 BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.1.1
-  - NAME=alpine-adoptopenjdk8 BASE_IMAGE=adoptopenjdk/openjdk8:jre8u202-b08-alpine 
-  - NAME=alpine-adoptopenjdk11 BASE_IMAGE=adoptopenjdk/openjdk11:jre-11.0.2.9-alpine
+  - NAME=alpine-graalvm8 BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.2.0
+  - NAME=alpine-adoptopenjdk8 BASE_IMAGE=adoptopenjdk/openjdk8:jre8u222-b10-alpine 
+  - NAME=alpine-adoptopenjdk11 BASE_IMAGE=adoptopenjdk/openjdk11:jre-11.0.4_11-alpine
 services:
   - docker
 
