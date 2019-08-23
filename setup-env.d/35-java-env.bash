@@ -29,9 +29,17 @@ GetAvailableMemory () {
 }
 
 # Setup default Java Options
+
 export JAVA_TMP_OPTS=${JAVA_TMP_OPTS:-$( if [[ -z ${TMPDIR} ]]; then echo ""; else echo "-Djava.io.tmpdir=$TMPDIR"; fi)}
 export GAE_MEMORY_MB=${GAE_MEMORY_MB:-$(GetAvailableMemory)}
+export MINIMAL_NON_HEAP_SIZE_MB=${MINIMAL_NON_HEAP_SIZE_MB:-"200"}
 export HEAP_SIZE_RATIO=${HEAP_SIZE_RATIO:-"80"}
+export NON_HEAP_SIZE_MB=${NON_HEAP_SIZE_MB:-$(expr ${GAE_MEMORY_MB} - ${GAE_MEMORY_MB} \* ${HEAP_SIZE_RATIO} / 100)}
+if (( $NON_HEAP_SIZE_MB < $MINIMAL_NON_HEAP_SIZE_MB )); then
+    export NON_HEAP_SIZE_MB=${MINIMAL_NON_HEAP_SIZE_MB}
+    export HEAP_SIZE_RATIO=$(expr 100 \* $(expr ${GAE_MEMORY_MB} - ${NON_HEAP_SIZE_MB}) / ${GAE_MEMORY_MB} )
+fi
+
 export HEAP_SIZE_MB=${HEAP_SIZE_MB:-$(expr ${GAE_MEMORY_MB} \* ${HEAP_SIZE_RATIO} / 100)}
 export JAVA_HEAP_OPTS=${JAVA_HEAP_OPTS:-"-Xms${HEAP_SIZE_MB}M -Xmx${HEAP_SIZE_MB}M"}
 export JAVA_GC_OPTS=${JAVA_GC_OPTS:-"-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:+PrintCommandLineFlags"}
