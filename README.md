@@ -16,10 +16,40 @@ This image has no such problems.
 
 To make your application correctly recognized in UI set:
 
-```
+```docker
 ENV GCP_APP_NAME "app-name"
 ENV GCP_APP_VERSION "1.0.0"
 ```
+
+Then run your application using provided launcher helper.
+
+```docker
+ENTRYPOINT ["/docker-entrypoint.bash"]
+CMD ["java", "-version"]
+```
+
+You can also launch other script, just make sure it is executable
+
+```docker
+ENTRYPOINT ["/docker-entrypoint.bash"]
+CMD ["/opt/app/bin/path_to_script.sh", "-version"]
+```
+
+
+### Memory allocation
+By default launcher calculates available memory using cgroup limits. If for some reason detecting memory does not work you can set available bytes as `KUBERNETES_MEMORY_LIMIT` environment variable.
+
+To better understand calculations of memory please check [setup-env.d/35-java-env.bash](setup-env.d/35-java-env.bash).
+
+There are few flags which control calculation of memory. Probably two most important ones are `MIN_NON_HEAP_SIZE_MB` and `HEAP_SIZE_RATIO`.
+
+By default `HEAP_SIZE_RATIO` is set to `80` meaning 80% of available memory.
+
+By default `MIN_NON_HEAP_SIZE_MB` is set to `200`. It is used to workaround non-heap memory issues on small containers, eg. <512MB.
+
+When calculated `NON_HEAP_SIZE_MB < MIN_NON_HEAP_SIZE_MB`, it changes to `MIN_NON_HEAP_SIZE_MB` and `HEAP_SIZE_RATIO` is adjusted.
+
+If you know your application won't need non-heap memory(except classloader which will be ok with 200Mb by default), you can set `HEAP_SIZE_RATIO` to `100` (100%), in such case it will automatically alocate for heap `HEAP_SIZE_MB = GAE_MEMORY_MB - MIN_NON_HEAP_SIZE_MB`
 
 ### Profiler and debugger
 
