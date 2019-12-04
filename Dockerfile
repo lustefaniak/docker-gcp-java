@@ -1,6 +1,6 @@
 ARG BASE_IMAGE=lustefaniak/graalvm:11-19.3.0
 
-FROM alpine:3.9.4 AS build
+FROM alpine:3.10.3 AS build
 
 RUN apk add --no-cache procps alpine-baselayout wget unzip tar bash
 
