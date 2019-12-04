@@ -66,6 +66,13 @@ Or run with
 -e PROFILER_ENABLE=true -e DBG_ENABLE=true
 ```
 
+### Heap sampling
+Heap sampling is available only for Java 11 and newer. To enable it add environment variables:
+
+```bash
+-e HEAP_PROFILER_ENABLE=true -e PROFILER_ENABLE=true
+```
+
 ### Heap dump on OOM
 
 By default it will exit JVM on OOM, to control that you can set `JAVA_EXIT_ON_OOM=false`.
