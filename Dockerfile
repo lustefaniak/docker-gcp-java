@@ -20,7 +20,7 @@ RUN tar Cxfvz /opt/cdbg /opt/cdbg/cdbg_java_agent.tar.gz --no-same-owner \
  && mkdir -p /var/log/app_engine/heapdump \
  && chmod go+rwx -R /var/log/app_engine
 
-FROM golang:1.12.1-alpine3.9 AS gcsupload
+FROM golang:1.12.14-alpine3.10 AS gcsupload
 RUN mkdir /app
 WORKDIR /app
 
