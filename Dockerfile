@@ -1,11 +1,11 @@
-ARG BASE_IMAGE=lustefaniak/graalvm:11-19.3.0
+ARG BASE_IMAGE=lustefaniak/graalvm:11-19.3.0.2
 
 FROM alpine:3.10.3 AS build
 
 RUN apk add --no-cache procps alpine-baselayout wget unzip tar bash
 
 ADD https://storage.googleapis.com/cloud-debugger/appengine-java/current/cdbg_java_agent.tar.gz /opt/cdbg/
-RUN mkdir -p /opt/cprof/ && cd /opt/cprof/ && wget -q https://github.com/lustefaniak/cloud-profiler-java/suites/342680877/artifacts/552951 -O dist.zip && unzip -j dist.zip && rm dist.zip
+RUN mkdir -p /opt/cprof/ && cd /opt/cprof/ && wget -q https://github.com/lustefaniak/cloud-profiler-java/suites/382711383/artifacts/929339 -O dist.zip && unzip -j dist.zip && rm dist.zip
 
 COPY docker-entrypoint.bash /docker-entrypoint.bash
 COPY upload-heap-dump.bash /upload-heap-dump.bash
