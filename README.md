@@ -2,6 +2,8 @@
 
 Docker image built from Alpine Linux, using GraalVM as JVM and with Stackdriver Debugger and Profiler binaries and scripts embedded.
 
+[![Build Status](https://travis-ci.org/lustefaniak/docker-gcp-java.svg?branch=master)](https://travis-ci.org/lustefaniak/docker-gcp-java)
+
 Download from https://hub.docker.com/r/lustefaniak/docker-gcp-java
 
 Base JVM image used is: [lustefaniak/docker-graalvm](https://github.com/lustefaniak/docker-graalvm) published to [Docker Hub](https://hub.docker.com/r/lustefaniak/docker-graalvm). There are also versions using `adoptopenjdk8` and `adoptopenjdk11`, check available [Docker Hub tags](https://hub.docker.com/r/lustefaniak/docker-gcp-java/tags).
