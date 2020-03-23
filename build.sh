@@ -10,8 +10,10 @@ if [[ -z "$BASE_IMAGE" ]]; then
     exit 1
 fi
 
-FULL_VERSION=$(git describe --tags)
-VERSION=${FULL_VERSION//v}
+if [[ -z "$VERSION" ]]; then
+    FULL_VERSION=$(git describe --tags)
+    VERSION=${FULL_VERSION//v}
+fi
 
 echo "Building using NAME=$NAME BASE_IMAGE=$BASE_IMAGE VERSION=$VERSION"
 
