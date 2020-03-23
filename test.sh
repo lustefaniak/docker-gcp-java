@@ -5,7 +5,9 @@ if [[ -z "$NAME" ]]; then
     exit 1
 fi
 
-FULL_VERSION=$(git describe --tags)
-VERSION=${FULL_VERSION//v}
+if [[ -z "$VERSION" ]]; then
+    FULL_VERSION=$(git describe --tags)
+    VERSION=${FULL_VERSION//v}
+fi
 
 docker run --rm "lustefaniak/docker-gcp-java:${NAME}_${VERSION}" || exit 1
