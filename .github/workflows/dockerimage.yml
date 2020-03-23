@@ -29,8 +29,9 @@ jobs:
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u lustefaniak --password-stdin
     - name: Push from master
       run: |
+        ${{ matrix.docker }} VERSION=${{ github.sha }} ./push_snapshot.sh
         if [ "${{ github.ref }}" = "refs/heads/master" ]; then
           ${{ matrix.docker }} VERSION=${{ github.sha }} ./push.sh
         else
-          echo "Not master branch, skipping..."
+          echo "Not master branch, will not update main images..."
         fi
