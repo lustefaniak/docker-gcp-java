@@ -31,7 +31,7 @@ RUN CGO_ENABLED=0 go build -installsuffix 'static' -o /gcsupload .
 
 FROM ${BASE_IMAGE}
 
-RUN apk add --no-cache alpine-baselayout ca-certificates bash curl procps
+RUN apk add --no-cache alpine-baselayout ca-certificates bash curl procps eudev-libs
 
 COPY --from=build /docker-entrypoint.bash /docker-entrypoint.bash
 COPY --from=build /upload-heap-dump.bash /upload-heap-dump.bash
