@@ -2,7 +2,7 @@
 
 Docker image built from Alpine Linux, using GraalVM as JVM and with Stackdriver Debugger and Profiler binaries and scripts embedded.
 
-[![Build Status](https://travis-ci.org/lustefaniak/docker-gcp-java.svg?branch=master)](https://travis-ci.org/lustefaniak/docker-gcp-java)
+![Docker Image CI](https://github.com/lustefaniak/docker-gcp-java/workflows/Docker%20Image%20CI/badge.svg?branch=master&event=push)
 
 Download from https://hub.docker.com/r/lustefaniak/docker-gcp-java
 
