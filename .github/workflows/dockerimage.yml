@@ -19,10 +19,10 @@ jobs:
       fail-fast: false
       matrix:
         docker:
-        - "NAME=alpine-graalvm8 BASE_IMAGE=lustefaniak/graalvm:8-19.3.1"
-        - "NAME=alpine-graalvm11 BASE_IMAGE=lustefaniak/graalvm:11-19.3.1"
-        - "NAME=alpine-adoptopenjdk8 BASE_IMAGE=adoptopenjdk/openjdk8:jre8u232-b09-alpine"
-        - "NAME=alpine-adoptopenjdk11 BASE_IMAGE=adoptopenjdk/openjdk11:jre-11.0.6_10-alpine"
+        - "NAME=alpine-graalvm8 BASE_IMAGE=lustefaniak/graalvm:8-20.1.0"
+        - "NAME=alpine-graalvm11 BASE_IMAGE=lustefaniak/graalvm:11-20.1.0"
+        - "NAME=alpine-adoptopenjdk8 BASE_IMAGE=adoptopenjdk/openjdk8:jre8u252-b09-alpine"
+        - "NAME=alpine-adoptopenjdk11 BASE_IMAGE=adoptopenjdk/openjdk11:jre-11.0.7_10-alpine"
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
