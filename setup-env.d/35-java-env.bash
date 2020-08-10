@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 GetAvailableMemory () {
-    local default_memory="$(awk '/MemTotal/{ print int($2/1024-400) }' /proc/meminfo)"
+    local default_memory="$(awk '/MemTotal/{ print int($2/1024) }' /proc/meminfo)"
     local memory=""
     
     # Search for a memory limit set by kubernetes
@@ -32,7 +32,7 @@ GetAvailableMemory () {
 
 export JAVA_TMP_OPTS=${JAVA_TMP_OPTS:-$( if [[ -z ${TMPDIR} ]]; then echo ""; else echo "-Djava.io.tmpdir=$TMPDIR"; fi)}
 export GAE_MEMORY_MB=${GAE_MEMORY_MB:-$(GetAvailableMemory)}
-export MIN_NON_HEAP_SIZE_MB=${MIN_NON_HEAP_SIZE_MB:-"200"}
+export MIN_NON_HEAP_SIZE_MB=${MIN_NON_HEAP_SIZE_MB:-"400"}
 export HEAP_SIZE_RATIO=${HEAP_SIZE_RATIO:-"80"}
 export NON_HEAP_SIZE_MB=${NON_HEAP_SIZE_MB:-$(expr ${GAE_MEMORY_MB} - ${GAE_MEMORY_MB} \* ${HEAP_SIZE_RATIO} / 100)}
 if (( $NON_HEAP_SIZE_MB < $MIN_NON_HEAP_SIZE_MB )); then
