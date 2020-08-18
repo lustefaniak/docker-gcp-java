@@ -1,6 +1,6 @@
 ARG BASE_IMAGE=lustefaniak/graalvm:11-19.3.0.2
 
-FROM alpine:3.10.3 AS build
+FROM alpine:3.11.6 AS build
 
 RUN apk add --no-cache procps alpine-baselayout wget unzip tar bash
 
@@ -20,7 +20,7 @@ RUN tar Cxfvz /opt/cdbg /opt/cdbg/cdbg_java_agent.tar.gz --no-same-owner \
  && mkdir -p /var/log/app_engine/heapdump \
  && chmod go+rwx -R /var/log/app_engine
 
-FROM golang:1.13.5-alpine3.10 AS gcsupload
+FROM golang:1.14.7-alpine3.11 AS gcsupload
 RUN mkdir /app
 WORKDIR /app
 
