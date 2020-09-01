@@ -19,8 +19,8 @@ jobs:
       fail-fast: false
       matrix:
         docker:
-        - "NAME=alpine-graalvm8 BASE_IMAGE=lustefaniak/graalvm:8-20.2.0-8a57e95dc255a5b4a5deb2e90d69e4f0dabe3eea"
-        - "NAME=alpine-graalvm11 BASE_IMAGE=lustefaniak/graalvm:11-20.2.0-8a57e95dc255a5b4a5deb2e90d69e4f0dabe3eea"
+        - "NAME=graalvm8 BASE_IMAGE=lustefaniak/graalvm:8-20.2.0-1af49265af5e0a15b55ae7a78fc3640c7e8e5493"
+￼       - "NAME=graalvm11 BASE_IMAGE=lustefaniak/graalvm:11-20.2.0-1af49265af5e0a15b55ae7a78fc3640c7e8e5493"
         - "NAME=alpine-adoptopenjdk8 BASE_IMAGE=adoptopenjdk/openjdk8:jre8u262-b10-alpine"
         - "NAME=alpine-adoptopenjdk11 BASE_IMAGE=adoptopenjdk/openjdk11:jre-11.0.8_10-alpine"
     steps:
