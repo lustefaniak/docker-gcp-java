@@ -13,22 +13,14 @@ COPY setup-env.d /setup-env.d/
 COPY shutdown/ /shutdown/
 
 RUN tar Cxfvz /opt/cdbg /opt/cdbg/cdbg_java_agent.tar.gz --no-same-owner \
- && rm /opt/cdbg/cdbg_java_agent.tar.gz \
- && tar Cxfvz /opt/cprof /opt/cprof/profiler_java_agent.tar.gz --no-same-owner \
- && rm /opt/cprof/profiler_java_agent.tar.gz \
- && chmod +x /docker-entrypoint.bash /upload-heap-dump.bash /shutdown/*.bash /setup-env.d/*.bash \
- && mkdir -p /var/log/app_engine/heapdump \
- && chmod go+rwx -R /var/log/app_engine
+    && rm /opt/cdbg/cdbg_java_agent.tar.gz \
+    && tar Cxfvz /opt/cprof /opt/cprof/profiler_java_agent.tar.gz --no-same-owner \
+    && rm /opt/cprof/profiler_java_agent.tar.gz \
+    && chmod +x /docker-entrypoint.bash /upload-heap-dump.bash /shutdown/*.bash /setup-env.d/*.bash \
+    && mkdir -p /var/log/app_engine/heapdump \
+    && chmod go+rwx -R /var/log/app_engine
 
-FROM golang:1.14.7-alpine3.11 AS gcsupload
-RUN mkdir /app
-WORKDIR /app
-
-RUN apk --no-cache add git 
-COPY gcsupload/gcsupload.go /app
-RUN go get -d -v .
-RUN CGO_ENABLED=0 go build -installsuffix 'static' -o /gcsupload .
-
+FROM lustefaniak/gcsupload:latest AS gcsupload
 FROM ${BASE_IMAGE}
 
 RUN apk add --no-cache alpine-baselayout ca-certificates bash curl procps eudev-libs

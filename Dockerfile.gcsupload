@@ -1,0 +1,7 @@
+FROM golang:1.14.7 AS gcsupload
+RUN mkdir /app
+WORKDIR /app
+
+COPY gcsupload/gcsupload.go /app
+RUN go get -d -v .
+RUN CGO_ENABLED=0 go build -installsuffix 'static' -o /gcsupload .
