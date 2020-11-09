@@ -1,6 +1,6 @@
-ARG BASE_IMAGE=lustefaniak/graalvm:11-19.3.0.2
+ARG BASE_IMAGE=lustefaniak/graalvm:11-20.2.0
 
-FROM alpine:3.11.6 AS build
+FROM alpine:3.12.1 AS build
 
 RUN apk add --no-cache procps alpine-baselayout wget unzip tar bash
 
@@ -23,8 +23,6 @@ RUN tar Cxfvz /opt/cdbg /opt/cdbg/cdbg_java_agent.tar.gz --no-same-owner \
 FROM lustefaniak/gcsupload:latest AS gcsupload
 FROM ${BASE_IMAGE}
 
-RUN apk add --no-cache alpine-baselayout ca-certificates bash curl procps eudev-libs
-
 COPY --from=build /docker-entrypoint.bash /docker-entrypoint.bash
 COPY --from=build /upload-heap-dump.bash /upload-heap-dump.bash
 COPY --from=build /setup-env.d /setup-env.d/
@@ -33,6 +31,9 @@ COPY --from=build /shutdown/ /shutdown/
 COPY --from=build /opt /opt
 COPY --from=build /var/log/app_engine /var/log/app_engine
 COPY --from=gcsupload /gcsupload /gcsupload
+
+ARG PLATFORM_DEPS="echo No platform dependencies"
+RUN sh -c "${PLATFORM_DEPS}"
 
 ENV GCP_APP_NAME "app-name"
 ENV GCP_APP_VERSION "0.0.0"
