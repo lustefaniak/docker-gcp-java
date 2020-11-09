@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        name: [graalvm11, adoptopenjdk11, adoptopenjdk11-debian-slim]
+        name: [graalvm11, adoptopenjdk11, spss]
         sbt: [1.4.2]
         scala: [2.13.2, 2.13.3]
         include:
@@ -20,8 +20,9 @@ jobs:
           - name: adoptopenjdk11
             base: adoptopenjdk/openjdk11:jdk-11.0.9_11-alpine-slim
             platform_deps: "apk add --no-cache alpine-baselayout bash"
-          - name: adoptopenjdk11-debian-slim
+          - name: spss
             base: adoptopenjdk/openjdk11:jdk-11.0.9_11-debian-slim
+            platform_deps: "apt-get install bash"
 
     steps:
       - uses: actions/checkout@v1
