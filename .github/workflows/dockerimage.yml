@@ -14,13 +14,13 @@ jobs:
         name: [graalvm11, adoptopenjdk11, spss]
         include:
           - name: graalvm11
-            base: lustefaniak/graalvm:11-20.2.0-d09b66f38a61439502b9d82359565e079eb5bdeb
+            base: lustefaniak/graalvm:11-20.2.0-0857c3ec8dfff63ef8c25f77090f48d4ea5006ee
           - name: adoptopenjdk11
             base: adoptopenjdk/openjdk11:jdk-11.0.9_11-alpine-slim
             platform_deps: "apk add --no-cache alpine-baselayout bash"
           - name: spss
             base: adoptopenjdk/openjdk11:jdk-11.0.9_11-debian-slim
-            platform_deps: "apt-get update && apt-get install -y --no-install-recommends python3-pip python3 python3-numpy python3-setuptools python3-wheel && rm -rf /var/lib/apt/lists/* && pip3 install savReaderWriter"
+            platform_deps: "apt-get update && apt-get install -y --no-install-recommends python3-pip python3 python3-numpy python3-setuptools python3-wheel libjemalloc2 && rm -rf /var/lib/apt/lists/* && pip3 install savReaderWriter"
 
     steps:
       - uses: actions/checkout@v1
