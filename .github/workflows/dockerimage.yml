@@ -20,7 +20,7 @@ jobs:
             platform_deps: "apk add --no-cache alpine-baselayout bash"
           - name: spss
             base: adoptopenjdk/openjdk11:jdk-11.0.9_11-debian-slim
-            platform_deps: "apt-get update && apt-get install -y --no-install-recommends python3-pip python3 python3-numpy python3-setuptools python3-wheel libjemalloc2 libjemalloc-dev binutils-common && rm -rf /var/lib/apt/lists/* && pip3 install savReaderWriter"
+            platform_deps: "apt-get update && apt-get install -y --no-install-recommends python3-pip python3 python3-numpy python3-setuptools python3-wheel libjemalloc2 libjemalloc-dev binutils && rm -rf /var/lib/apt/lists/* && pip3 install savReaderWriter"
 
     steps:
       - uses: actions/checkout@v1
