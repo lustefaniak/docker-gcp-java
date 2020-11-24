@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=lustefaniak/graalvm:11-20.2.0
+ARG BASE_IMAGE=lustefaniak/graalvm:11-20.3.0
 
 FROM alpine:3.12.1 AS build
 
@@ -32,24 +32,26 @@ COPY --from=build /opt /opt
 COPY --from=build /var/log/app_engine /var/log/app_engine
 COPY --from=gcsupload /gcsupload /gcsupload
 
-ARG PLATFORM_DEPS="echo No platform dependencies"
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libjemalloc2 libjemalloc-dev bc \
+    && rm -rf /var/lib/apt/lists/*
+
+ARG PLATFORM_DEPS="echo No extra setup"
 RUN sh -c "${PLATFORM_DEPS}"
 
-ENV GCP_APP_NAME "app-name"
-ENV GCP_APP_VERSION "0.0.0"
-
-ENV PROFILER_ENABLE false
-ENV HEAP_PROFILER_ENABLE false
-ENV DBG_ENABLE false
-
-ENV JAVA_EXIT_ON_OOM true
-ENV JAVA_HEAP_DUMP_ON_OOM false
-ENV JAVA_HEAP_DUMP_PATH /var/log/app_engine/heapdump/
-ENV UPLOAD_HEAP_DUMP false
-ENV GCS_HEAP_DUMP_PROJECT_ID "project_id"
-ENV GCS_HEAP_DUMP_BUCKET "gcs_bucket_name"
-ENV GCS_HEAP_DUMP_COMPRESS "true"
-ENV GCS_HEAP_DUMP_PATH ""
+ENV GCP_APP_NAME="app-name" \
+    GCP_APP_VERSION="0.0.0" \
+    PROFILER_ENABLE=false \
+    HEAP_PROFILER_ENABLE=false \
+    DBG_ENABLE=false \
+    JAVA_EXIT_ON_OOM=true \
+    JAVA_HEAP_DUMP_ON_OOM=false \
+    JAVA_HEAP_DUMP_PATH=/var/log/app_engine/heapdump/ \
+    UPLOAD_HEAP_DUMP=false \
+    GCS_HEAP_DUMP_PROJECT_ID="project_id" \
+    GCS_HEAP_DUMP_BUCKET="gcs_bucket_name" \
+    GCS_HEAP_DUMP_COMPRESS="true" \
+    GCS_HEAP_DUMP_PATH="" 
 
 ENTRYPOINT ["/docker-entrypoint.bash"]
 CMD ["java", "-version"]
