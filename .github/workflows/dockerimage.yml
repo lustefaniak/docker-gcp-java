@@ -16,7 +16,7 @@ jobs:
           - name: adoptopenjdk11
             base: adoptopenjdk/openjdk11:jdk-11.0.10_9-ubuntu-slim
           - name: adoptopenjdk16
-            base: adoptopenjdk/openjdk11:jdk-16.0.2_7-ubuntu-slim
+            base: adoptopenjdk/openjdk16:jdk-16.0.2_7-ubuntu-slim
           - name: graalvm11
             base: lustefaniak/graalvm:11-21.2.0
           - name: graalvm16
