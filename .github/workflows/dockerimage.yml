@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        name: [graalvm11, graalvm16, adoptopenjdk11, adoptopenjdk16, spss, graalvm16]
+        name: [graalvm11, graalvm16, adoptopenjdk11, adoptopenjdk16, spss, spss16]
         include:
           - name: adoptopenjdk11
             base: adoptopenjdk/openjdk11:jdk-11.0.10_9-ubuntu-slim
