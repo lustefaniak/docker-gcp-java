@@ -11,21 +11,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        name: [graalvm11, graalvm16, adoptopenjdk11, adoptopenjdk16, spss, spss16]
+        name: [graalvm11, graalvm17, spss11, spss17]
         include:
-          - name: adoptopenjdk11
-            base: adoptopenjdk/openjdk11:jdk-11.0.10_9-ubuntu-slim
-          - name: adoptopenjdk16
-            base: adoptopenjdk/openjdk16:jdk-16.0.2_7-ubuntu-slim
           - name: graalvm11
-            base: lustefaniak/graalvm:11-21.2.0
-          - name: graalvm16
-            base: lustefaniak/graalvm:16-21.2.0            
-          - name: spss
-            base: lustefaniak/graalvm:11-21.2.0
+            base: lustefaniak/graalvm:11-21.3.0
+          - name: graalvm17
+            base: lustefaniak/graalvm:17-21.3.0            
+          - name: spss11
+            base: lustefaniak/graalvm:11-21.3.0
             platform_deps: "apt-get update && apt-get install -y --no-install-recommends nodejs npm python3-pip python3 python3-numpy python3-setuptools python3-wheel&& rm -rf /var/lib/apt/lists/* && pip3 install savReaderWriter"
-          - name: spss16
-            base: lustefaniak/graalvm:16-21.2.0
+          - name: spss17
+            base: lustefaniak/graalvm:17-21.3.0
             platform_deps: "apt-get update && apt-get install -y --no-install-recommends nodejs npm python3-pip python3 python3-numpy python3-setuptools python3-wheel&& rm -rf /var/lib/apt/lists/* && pip3 install savReaderWriter"
 
 
