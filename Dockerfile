@@ -4,8 +4,10 @@ FROM alpine:3.12.1 AS build
 
 RUN apk add --no-cache procps alpine-baselayout wget unzip tar bash
 
+ENV CLOUD_PROFILER_AGENT_VERSION=20211101_RC00
+
 ADD https://storage.googleapis.com/cloud-debugger/appengine-java/current/cdbg_java_agent.tar.gz /opt/cdbg/
-ADD https://storage.googleapis.com/cloud-profiler/java/latest/profiler_java_agent.tar.gz /opt/cprof/
+ADD https://storage.googleapis.com/cloud-profiler/java/cloud-profiler-java-agent_${CLOUD_PROFILER_AGENT_VERSION}.tar.gz /opt/cprof/profiler_java_agent.tar.gz
 
 COPY docker-entrypoint.bash /docker-entrypoint.bash
 COPY upload-heap-dump.bash /upload-heap-dump.bash
